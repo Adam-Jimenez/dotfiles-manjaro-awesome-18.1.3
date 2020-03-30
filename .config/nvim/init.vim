@@ -1,23 +1,58 @@
-" ===================== PLUGINS =====================
-if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" =================== PLUGINS ======================
+if &compatible
+ set nocompatible
+endif
+" Add the dein installation directory into runtimepath
+"
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+if dein#load_state('~/.cache/dein')
+    call dein#begin('~/.cache/dein')
+
+    call dein#add('~/.cache/dein')
+    call dein#add('Shougo/deoplete.nvim') " autocomplete
+    if !has('nvim')
+        call dein#add('roxma/nvim-yarp')
+        call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
+    call dein#add('w0rp/ale') " linting
+    call dein#add('mhinz/vim-signify') " version control gutter symbols
+    call dein#add('janko-m/vim-test') " test runner
+    call dein#add('Shougo/neosnippet.vim') " code snippets
+    call dein#add('Shougo/neosnippet-snippets') " code snippet collection
+    call dein#add('honza/vim-snippets') " more snippets
+    call dein#add('Raimondi/delimitMate') " Automatic closing of quotes, brackets, etc.
+    call dein#add('tpope/vim-commentary') " Comment code easily
+    call dein#add('tpope/vim-surround') " Surround with quotes, brackets
+    call dein#add('tpope/vim-repeat') " Enable plugins to use repeat '.'
+    call dein#add('tpope/vim-fugitive') " Git wrapper
+    call dein#add('sheerun/vim-polyglot') " language specific syntax/indent
+    call dein#add('cloudhead/neovim-fuzzy') " language specific syntax/indent
+    call dein#add('francoiscabrol/ranger.vim') " ranger file manager integration
+    call dein#add('rbgrouleff/bclose.vim') " close buffer without closing window 
+    call dein#add('wellle/targets.vim') " new text objects
+    call dein#add('editorconfig/editorconfig-vim') " configures vim according to .editorconfig file
+    call dein#add('itchyny/lightline.vim') " aesthetics
+    call dein#add('JuliaEditorSupport/julia-vim') " julia lang support
+    call dein#add('https://github.com/alvan/vim-closetag') " close HTML tags automatically
+    call dein#add('posva/vim-vue') " vue files syntax support
+    call dein#add('eugen0329/vim-esearch') " global search
+    call dein#add('tpope/vim-sleuth') " file indent detection
+
+
+    call dein#add('dikiaap/minimalist') " colorscheme
+
+    call dein#end()
+    call dein#save_state()
 endif
 
-call plug#begin('~/.config/nvim/plugged')
-Plug 'dikiaap/minimalist' " colorscheme
-Plug 'wellle/targets.vim' " new text objects 
-Plug 'tpope/vim-repeat' " plugins repeat with .
-Plug 'tpope/vim-surround' " replace surrounding brackets, quotes
-Plug 'tpope/vim-commentary' " comment lines easily
-Plug 'tpope/vim-sleuth' " file indent detection
-Plug 'junegunn/fzf.vim' " fuzzy file search
-Plug 'mhinz/vim-signify' " version control gutter symbols
-Plug 'Raimondi/delimitMate' " automatic closing of quotes, brackets
-Plug 'sheerun/vim-polyglot' " language specific syntax/index
-Plug 'itchyny/lightline.vim' " aesthetics
-Plug 'alvan/vim-closetag' " close HTML tags automatically
-call plug#end()
+filetype plugin indent on
+syntax enable
+"
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+    call dein#install()
+endif
 
 " ===================== COLORSCHEME =================
 colorscheme minimalist
@@ -29,7 +64,7 @@ set softtabstop=4       " number of spaces per TAB when editing
 set expandtab           " tabs are spaces
 
 " ===================== USER INTERFACE ==============
-" set relativenumber      " show relative line numbers
+set relativenumber      " show relative line numbers
 set number              " show current line number
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
@@ -52,6 +87,7 @@ nnoremap N Nzz
 set scrolloff=100       "Start scrolling when we're N lines away from margins
 set sidescrolloff=30
 set sidescroll=5
+
 
 " ===================== COPY & PASTE ====================
 " Yank to the end of the line
@@ -96,11 +132,64 @@ set undodir=~/.config/nvim/backups
 set undofile
 
 " ===================== PLUGIN CONFIG ===============
+let g:deoplete#enable_at_startup = 1
+" F4 to toggle Nuake
+nnoremap <F4> :Nuake<CR>
+inoremap <F4> <C-\><C-n>:Nuake<CR>
+tnoremap <F4> <C-\><C-n>:Nuake<CR>
+let g:neosnippet#snippets_directory = [
+            \ '~/.cache/dein/repos/github.com/honza/vim-snippets/snippets',
+            \ '~/.cache/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets']
+
+"auto indent on enter
+let g:delimitMate_expand_cr = 1     
+let delimitMate_matchpairs = "(:),[:],{:}"
+
 " Comment map
-nmap <Leader>c gcc      
+nmap <Leader>c gcc
 " Line comment command
-xmap <Leader>c gc 
-nnoremap <silent> <leader>f :FZF<cr>
+xmap <Leader>c gc
+
+" Expand snippets on tab if snippets exists, otherwise do autocompletion
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\ : pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Fix for jumping over placeholders for neosnippet
+smap <expr><TAB> neosnippet#jumpable() ?
+\ "\<Plug>(neosnippet_jump)"
+\: "\<TAB>"
+
+nmap <Leader>gd :Gdiff<CR>
+nmap <Leader>gs :Gstatus<CR>
+nmap <Leader>gbl :Gblame<CR>
+nmap <Leader>gc :Gcommit<CR>
+nnoremap <C-p> :FuzzyOpen<CR>
+
+" tests
+let test#strategy = "neovim"
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>     
+nmap <silent> <leader>ts :TestSuite<CR>
+
+" julia latex-to-unicode as you type
+:let g:latex_to_unicode_auto = 1
+
+runtime macros/matchit.vim
+
+let g:closetag_filetypes = 'html,xhtml,phtml, vue'
+
+" Start python debugging server
+command! -nargs=* Pydb call Pydb( '<args>' )
+fu! Pydb(args)
+    execute "silent !pydbgp % ".a:args." &"
+endfunction
+
+let g:ale_linters = { 'javascript': ['prettier', 'eslint'] }
+let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_fix_on_save = 1
+call esearch#map('<leader>ss', 'esearch')
+call esearch#map('<leader>sw', 'esearch-word-under-cursor')
 " ================ COMPLETION =======================
 
 set wildmode=list:full
