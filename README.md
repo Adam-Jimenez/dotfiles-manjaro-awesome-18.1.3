@@ -4,8 +4,8 @@ Dotfiles management following this tutorial: https://www.atlassian.com/git/tutor
 
 # Setup
 
-sudo pacman-mirrors -f 5 && sudo pacman -Syyu
-sudo pacman -S yay
-sudo yay -S lsd
-sudo yay -S nvim
-sudo pacman -R compton
+- sudo pacman-mirrors -f 5 && sudo pacman -Syyu
+- sudo pacman -S yay
+- sudo yay -S lsd
+- sudo yay -S nvim
+- sudo pacman -R compton
