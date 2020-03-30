@@ -8,4 +8,6 @@ Dotfiles management following this tutorial: https://www.atlassian.com/git/tutor
 - sudo pacman -S yay
 - sudo yay -S lsd
 - sudo yay -S nvim
+- sudo yay -S nodejs
+- sudo yay -S npm
 - sudo pacman -R compton
