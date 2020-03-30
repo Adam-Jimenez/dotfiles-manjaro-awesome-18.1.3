@@ -104,7 +104,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
 alias v='nvim'
 alias o='xdg-open'
-alias l='lsd'
+alias l='lsd -l'
+alias la='lsd -la'
 alias dc='docker-compose'
 alias mkd="mkdir"
 alias rmd="rmdir"
