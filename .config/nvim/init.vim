@@ -11,7 +11,12 @@ Plug 'tpope/vim-repeat' " plugins repeat with .
 Plug 'tpope/vim-surround' " replace surrounding brackets, quotes
 Plug 'tpope/vim-commentary' " comment lines easily
 Plug 'tpope/vim-sleuth' " file indent detection
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim' " fuzzy file search
+Plug 'mhinz/vim-signify' " version control gutter symbols
+Plug 'Raimondi/delimitMate' " automatic closing of quotes, brackets
+Plug 'sheerun/vim-polyglot' " language specific syntax/index
+Plug 'itchyny/lightline.vim' " aesthetics
+Plug 'alvan/vim-closetag' " close HTML tags automatically
 call plug#end()
 
 " ===================== COLORSCHEME =================
