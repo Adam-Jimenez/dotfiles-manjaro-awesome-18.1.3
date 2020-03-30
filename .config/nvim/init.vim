@@ -6,14 +6,12 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'dikiaap/minimalist' " colorscheme
-Plug 'bling/vim-airline' " status bar
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/targets.vim' " new text objects 
 Plug 'tpope/vim-repeat' " plugins repeat with .
 Plug 'tpope/vim-surround' " replace surrounding brackets, quotes
 Plug 'tpope/vim-commentary' " comment lines easily
-Plug 'cloudhead/neovim-fuzzy' " fuzzy file searcher
 Plug 'tpope/vim-sleuth' " file indent detection
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 " ===================== COLORSCHEME =================
@@ -26,7 +24,7 @@ set softtabstop=4       " number of spaces per TAB when editing
 set expandtab           " tabs are spaces
 
 " ===================== USER INTERFACE ==============
-set relativenumber      " show relative line numbers
+" set relativenumber      " show relative line numbers
 set number              " show current line number
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
@@ -49,7 +47,6 @@ nnoremap N Nzz
 set scrolloff=100       "Start scrolling when we're N lines away from margins
 set sidescrolloff=30
 set sidescroll=5
-
 
 " ===================== COPY & PASTE ====================
 " Yank to the end of the line
@@ -98,8 +95,7 @@ set undofile
 nmap <Leader>c gcc      
 " Line comment command
 xmap <Leader>c gc 
-" fuzzy search
-nnoremap <C-p> :FuzzyOpen<CR> 
+nnoremap <silent> <leader>f :FZF<cr>
 " ================ COMPLETION =======================
 
 set wildmode=list:full
