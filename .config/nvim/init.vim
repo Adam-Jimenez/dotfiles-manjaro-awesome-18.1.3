@@ -133,10 +133,7 @@ set undofile
 
 " ===================== PLUGIN CONFIG ===============
 let g:deoplete#enable_at_startup = 1
-" F4 to toggle Nuake
-nnoremap <F4> :Nuake<CR>
-inoremap <F4> <C-\><C-n>:Nuake<CR>
-tnoremap <F4> <C-\><C-n>:Nuake<CR>
+
 let g:neosnippet#snippets_directory = [
             \ '~/.cache/dein/repos/github.com/honza/vim-snippets/snippets',
             \ '~/.cache/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets']
@@ -207,3 +204,5 @@ set wildignore+=*.png,*.jpg,*.gif
 
 " If popup window is visible do autocompletion from back
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+nnoremap 0 ^

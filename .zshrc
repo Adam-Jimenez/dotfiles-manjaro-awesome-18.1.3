@@ -109,3 +109,7 @@ alias la='lsd -la'
 alias dc='docker-compose'
 alias mkd="mkdir"
 alias rmd="rmdir"
+alias py="python"
+alias r="ranger"
+
+export EDITOR="nvim"
