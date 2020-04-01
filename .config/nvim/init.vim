@@ -135,8 +135,7 @@ set undofile
 let g:deoplete#enable_at_startup = 1
 
 let g:neosnippet#snippets_directory = [
-            \ '~/.cache/dein/repos/github.com/honza/vim-snippets/snippets',
-            \ '~/.cache/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets']
+            \ '~/.config/nvim/snippets']
 
 "auto indent on enter
 let g:delimitMate_expand_cr = 1     

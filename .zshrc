@@ -105,6 +105,7 @@ config config --local status.showUntrackedFiles no
 alias v='nvim'
 alias o='xdg-open'
 alias l='lsd -l'
+alias ls='lsd'
 alias la='lsd -la'
 alias dc='docker-compose'
 alias mkd="mkdir"
