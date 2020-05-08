@@ -371,7 +371,15 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    awful.key(
+        {},
+        'XF86PowerOff',
+        function()
+          awful.spawn.with_shell("~/.config/rofi/power/powermenu.sh")
+        end,
+        {description = 'display exit menu', group = 'hotkeys'}
+        )
 )
 
 clientkeys = gears.table.join(
